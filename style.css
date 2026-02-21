@@ -1,47 +1,69 @@
+/* Global */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f7f9fc;
+  background: #F5F5F5;
   color: #222;
 }
 
+/* Header */
 header {
-  background: #1E88E5;
-  color: white;
-  padding: 40px 20px;
+  background: #000000;
+  color: #FFFFFF;
+  padding: 50px 20px;
   text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
 }
 
 .tagline {
   font-size: 1.2rem;
   margin-top: 10px;
+  color: #BDBDBD;
 }
 
+/* Sections */
 section {
   padding: 40px 20px;
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
 }
 
 h2 {
-  color: #1E88E5;
+  color: #D32F2F;
   margin-bottom: 10px;
+  font-size: 1.8rem;
 }
 
+/* Services List */
 ul {
   list-style: none;
   padding: 0;
 }
 
 ul li {
-  padding: 8px 0;
-  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  border-bottom: 1px solid #DDD;
+  font-size: 1.1rem;
 }
 
+/* Contact Section */
+#contact p {
+  font-size: 1.1rem;
+  margin: 8px 0;
+}
+
+/* Footer */
 footer {
   text-align: center;
   padding: 20px;
-  background: #eee;
+  background: #000000;
+  color: #FFFFFF;
   margin-top: 40px;
+  font-size: 0.9rem;
 }
