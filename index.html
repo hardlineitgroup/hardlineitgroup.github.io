@@ -274,7 +274,8 @@
 
     .services-grid,
     .notes-grid,
-    .contact-grid {
+    .contact-grid,
+    .owner-grid {
       display: grid;
       gap: 18px;
     }
@@ -282,6 +283,22 @@
     .services-grid { grid-template-columns: repeat(3, 1fr); }
     .notes-grid { grid-template-columns: repeat(3, 1fr); }
     .contact-grid { grid-template-columns: 1.1fr 0.9fr; }
+    .owner-grid { grid-template-columns: 220px 1fr; align-items: center; }
+
+    .owner-photo-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .owner-photo {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      background: #111;
+    }
 
     .service-card,
     .note-card,
@@ -351,6 +368,7 @@
       .services-grid,
       .notes-grid,
       .contact-grid,
+      .owner-grid,
       .footer-row {
         grid-template-columns: 1fr;
         display: grid;
@@ -522,6 +540,29 @@
           <p>
             Hardline IT Group focuses on the technology side of keeping a practice running well: workstations, servers, Microsoft 365, security, backups, and the day-to-day support that keeps small issues from turning into major disruptions. The approach is straightforward, responsive, and built around what actually helps a dental office operate more smoothly.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="owner">
+      <div class="container">
+        <div class="section-head">
+          <h2>Owner-Led, Local Support</h2>
+          <p>Hardline IT Group is built to feel personal, dependable, and close to home — because it is.</p>
+        </div>
+
+        <div class="content-card owner-grid">
+          <div class="owner-photo-wrap">
+            <img class="owner-photo" src="IMG_0171.jpg" alt="Alec from Hardline IT Group" />
+          </div>
+          <div>
+            <p>
+              Hardline IT Group is run locally by a Colorado native who understands how much small businesses depend on stable technology and straightforward support. The goal is simple: be the kind of IT partner people actually want to call when something goes wrong.
+            </p>
+            <p class="quote">
+              You are not being handed off to a giant help desk or a faceless support queue. You are working with someone who lives here, cares about the community here, and wants to build long-term trust with the practices he supports.
+            </p>
+          </div>
         </div>
       </div>
     </section>
