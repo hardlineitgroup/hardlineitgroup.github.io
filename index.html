@@ -4,22 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hardline IT Group | Dental IT Support for Colorado Springs & Pueblo</title>
-  <meta name="description" content="Hardline IT Group provides local dental IT support for practices in Colorado Springs and Pueblo, including dental software support, Microsoft 365, backups, security, workstations, and servers." />
+  <meta name="description" content="Hardline IT Group provides local dental IT support for practices in Colorado Springs and Pueblo, including dental software support, Microsoft 365, security, backups, workstations, and servers." />
   <style>
     :root {
-      --bg: #050505;
-      --panel: #0e0e10;
-      --panel-2: #141416;
-      --line: rgba(255,255,255,0.1);
-      --text: #f3f3f4;
-      --muted: #b9bcc3;
-      --soft: #8d919a;
+      --bg: #040404;
+      --bg-2: #0b0b0d;
+      --panel: rgba(255,255,255,0.045);
+      --panel-2: rgba(255,255,255,0.03);
+      --line: rgba(255,255,255,0.11);
+      --line-soft: rgba(255,255,255,0.07);
+      --text: #f5f7fa;
+      --muted: #c0c6d1;
+      --soft: #8f98a7;
+      --silver: #e7eaef;
       --red: #c51608;
-      --red-dark: #8d0f05;
-      --silver: #d9d9db;
-      --shadow: 0 24px 60px rgba(0,0,0,0.35);
-      --radius: 20px;
-      --max: 1180px;
+      --red-2: #ef4a39;
+      --red-3: rgba(239,74,57,0.18);
+      --shadow: 0 26px 70px rgba(0,0,0,0.34);
+      --radius: 24px;
+      --radius-sm: 18px;
+      --max: 1140px;
     }
 
     * { box-sizing: border-box; }
@@ -29,11 +33,26 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top center, rgba(197,22,8,0.14), transparent 26%),
-        linear-gradient(180deg, #020202 0%, #070707 46%, #0b0b0c 100%);
-      line-height: 1.65;
+        radial-gradient(circle at 14% 0%, rgba(239,74,57,0.14), transparent 24%),
+        radial-gradient(circle at 88% 10%, rgba(197,22,8,0.10), transparent 18%),
+        linear-gradient(180deg, #020202 0%, #070708 46%, #0b0b0d 100%);
+      line-height: 1.58;
     }
 
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.24;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.32), transparent 84%);
+    }
+
+    img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
 
     .container {
@@ -45,349 +64,563 @@
       position: sticky;
       top: 0;
       z-index: 40;
+      backdrop-filter: blur(16px);
+      background: rgba(4,4,4,0.86);
       border-bottom: 1px solid rgba(255,255,255,0.06);
-      background: rgba(5,5,5,0.88);
-      backdrop-filter: blur(14px);
     }
 
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      padding: 16px 0;
+      gap: 22px;
+      padding: 14px 0;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       min-width: 0;
     }
 
-    .brand-mark {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: linear-gradient(180deg, #1a1a1d, #09090a);
-      display: grid;
-      place-items: center;
-      font-size: 0.82rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      color: var(--silver);
+    .logo-shell,
+    .owner-shell {
+      position: relative;
+      overflow: hidden;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
       box-shadow: var(--shadow);
     }
 
-    .brand-copy {
-      min-width: 0;
+    .logo-shell {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+    }
+
+    .brand-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 7px;
+    }
+
+    .fallback-badge {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      color: var(--silver);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background:
+        radial-gradient(circle at top, rgba(239,74,57,0.20), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.015));
+    }
+
+    .logo-shell.fallback .fallback-badge,
+    .owner-shell.fallback .fallback-badge {
+      display: grid;
     }
 
     .brand-copy strong {
       display: block;
+      font-size: 0.92rem;
+      line-height: 1.1;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-size: 0.98rem;
-      color: var(--text);
     }
 
     .brand-copy span {
       display: block;
-      color: var(--soft);
-      font-size: 0.82rem;
-      letter-spacing: 0.05em;
+      margin-top: 2px;
+      font-size: 0.72rem;
+      line-height: 1.1;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      color: var(--soft);
     }
 
-    .nav-links {
+    .nav-links,
+    .contact-inline {
       display: flex;
-      gap: 24px;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.92rem;
       color: var(--muted);
-      font-size: 0.95rem;
+    }
+
+    .nav-links a,
+    .contact-inline a,
+    .subtle-link,
+    .btn,
+    .service-card,
+    .trust-card,
+    .proof-card,
+    .contact-card {
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
     }
 
     .nav-links a:hover,
     .contact-inline a:hover,
-    .footer-links a:hover { color: var(--text); }
-
-    .contact-inline {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      font-size: 0.95rem;
-      color: var(--muted);
-      white-space: nowrap;
+    .subtle-link:hover {
+      color: var(--text);
     }
 
-    .contact-inline .divider,
-    .footer-links .divider {
+    .divider {
       width: 1px;
       height: 14px;
-      background: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.15);
     }
 
     .hero {
-      padding: 78px 0 34px;
+      padding: 48px 0 20px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 30px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 18px;
       align-items: stretch;
     }
 
     .hero-main,
     .hero-side,
-    .content-card,
     .service-card,
-    .note-card,
-    .contact-card {
+    .proof-card,
+    .contact-card,
+    .trust-card {
+      position: relative;
+      overflow: hidden;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      background: linear-gradient(180deg, rgba(255,255,255,0.038), rgba(255,255,255,0.02));
       box-shadow: var(--shadow);
     }
 
+    .hero-main::after,
+    .hero-side::after,
+    .contact-card::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(197,22,8,0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-main::after {
+      right: -74px;
+      top: -88px;
+    }
+
+    .hero-side::after,
+    .contact-card::after {
+      left: -62px;
+      bottom: -92px;
+    }
+
     .hero-main {
-      padding: 38px;
+      padding: 28px;
     }
 
     .eyebrow {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 8px 12px;
-      border: 1px solid rgba(197,22,8,0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 7px 12px;
       border-radius: 999px;
-      color: #f0c2bd;
-      font-size: 0.84rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      border: 1px solid rgba(239,74,57,0.28);
       background: rgba(197,22,8,0.08);
+      color: #f3c3be;
+      font-size: 0.73rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.4rem, 5.1vw, 4.8rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
+      max-width: 11ch;
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
       text-transform: uppercase;
     }
 
-    .hero-main h1 span {
+    .hero-accent {
       display: block;
+      margin-top: 8px;
       color: var(--silver);
     }
 
     .lead {
-      margin: 22px 0 0;
-      max-width: 62ch;
+      margin: 16px 0 0;
+      max-width: 56ch;
+      font-size: 0.99rem;
       color: var(--muted);
-      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 17px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.93rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--red-2), var(--red));
+      color: #fff;
+      box-shadow: 0 16px 34px rgba(197,22,8,0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.035);
+      color: var(--silver);
+      border-color: rgba(255,255,255,0.12);
     }
 
     .hero-strip {
-      margin-top: 28px;
-      padding-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+      padding-top: 18px;
       border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px 28px;
-      color: var(--muted);
-      font-size: 0.97rem;
     }
 
-    .hero-strip strong { color: var(--text); }
+    .strip-item {
+      padding: 12px 13px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.075);
+      background: rgba(255,255,255,0.028);
+    }
+
+    .strip-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.89rem;
+      color: var(--text);
+    }
+
+    .strip-item span {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
 
     .hero-side {
-      padding: 30px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      gap: 22px;
+      gap: 16px;
+    }
+
+    .stack-label,
+    .card-tag,
+    .proof-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #f3c3be;
+    }
+
+    .owner-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .owner-shell {
+      width: 90px;
+      height: 90px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    }
+
+    .owner-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .owner-shell .fallback-badge {
+      font-size: 1.15rem;
     }
 
     .hero-side h2,
-    .section-head h2 {
+    .section-head h2,
+    .contact-card h2 {
       margin: 0;
-      letter-spacing: -0.03em;
+      line-height: 1.03;
+      letter-spacing: -0.04em;
     }
 
     .hero-side h2 {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
     }
 
     .hero-side p,
-    .content-card p,
+    .section-head p,
     .service-card p,
-    .note-card p,
+    .trust-card p,
+    .proof-card p,
     .contact-card p {
       margin: 0;
       color: var(--muted);
     }
 
-    .side-list {
+    .trust-list {
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .side-item {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.025);
+    .trust-card {
+      padding: 14px 15px;
+      border-radius: 18px;
       border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.024);
+      box-shadow: none;
     }
 
-    .side-item strong {
+    .trust-card strong,
+    .service-card h3,
+    .proof-card h3 {
       display: block;
       margin-bottom: 4px;
+      font-size: 0.99rem;
       color: var(--text);
-      font-size: 0.97rem;
     }
 
     .section {
-      padding: 22px 0;
+      padding: 20px 0;
     }
 
     .section-head {
       display: flex;
       justify-content: space-between;
       align-items: end;
-      gap: 20px;
-      margin-bottom: 20px;
+      gap: 16px;
+      margin-bottom: 16px;
     }
 
     .section-head h2 {
-      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      font-size: clamp(1.5rem, 2.4vw, 2.05rem);
     }
 
     .section-head p {
-      margin: 0;
-      max-width: 56ch;
+      max-width: 52ch;
+      font-size: 0.95rem;
       color: var(--soft);
     }
 
-    .content-card {
-      padding: 28px;
-    }
-
     .services-grid,
-    .notes-grid,
-    .contact-grid,
-    .owner-grid {
+    .proof-grid {
       display: grid;
-      gap: 18px;
-    }
-
-    .services-grid { grid-template-columns: repeat(3, 1fr); }
-    .notes-grid { grid-template-columns: repeat(3, 1fr); }
-    .contact-grid { grid-template-columns: 1.1fr 0.9fr; }
-    .owner-grid { grid-template-columns: 220px 1fr; align-items: center; }
-
-    .owner-photo-wrap {
-      display: flex;
-      justify-content: center;
-    }
-
-    .owner-photo {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: var(--shadow);
-      background: #111;
+      gap: 14px;
+      grid-template-columns: repeat(3, 1fr);
     }
 
     .service-card,
-    .note-card,
+    .proof-card {
+      padding: 20px;
+    }
+
+    .service-card:hover,
+    .proof-card:hover,
+    .contact-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.16);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.026));
+    }
+
+    .card-tag,
+    .proof-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .process {
+      padding: 6px 0 22px;
+    }
+
+    .process-band {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line-soft);
+      background: rgba(255,255,255,0.025);
+      box-shadow: var(--shadow);
+    }
+
+    .process-step {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.026);
+    }
+
+    .process-step small {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.72rem;
+      color: #f3c3be;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .process-step strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+      color: var(--text);
+    }
+
+    .process-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .contact-wrap {
+      padding-bottom: 38px;
+    }
+
     .contact-card {
       padding: 24px;
-    }
-
-    .service-card h3,
-    .note-card h3,
-    .contact-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.08rem;
-    }
-
-    .quote {
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      color: var(--silver);
-      font-size: 1.02rem;
-    }
-
-    .contact-list {
       display: grid;
-      gap: 12px;
-      margin-top: 6px;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+      gap: 18px;
+      align-items: center;
     }
 
-    .contact-list div {
+    .contact-points {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-point {
+      padding: 14px 15px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
       color: var(--muted);
-      font-size: 1rem;
     }
 
-    .contact-list strong { color: var(--text); }
+    .contact-point strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.94rem;
+      color: var(--text);
+    }
 
     .subtle-link {
       color: var(--silver);
-      border-bottom: 1px solid rgba(255,255,255,0.16);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
       padding-bottom: 1px;
     }
 
     .footer {
-      padding: 34px 0 50px;
+      padding: 20px 0 40px;
       color: var(--soft);
-      font-size: 0.94rem;
+      font-size: 0.91rem;
     }
 
     .footer-row {
       display: flex;
       justify-content: space-between;
-      gap: 18px;
       align-items: center;
+      gap: 14px;
+      padding-top: 15px;
       border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 18px;
     }
 
     .footer-links {
       display: flex;
-      gap: 16px;
-      align-items: center;
-      color: var(--muted);
       flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 1020px) {
       .hero-grid,
+      .contact-card,
       .services-grid,
-      .notes-grid,
-      .contact-grid,
-      .owner-grid,
+      .proof-grid,
+      .process-band,
       .footer-row {
-        grid-template-columns: 1fr;
         display: grid;
+        grid-template-columns: 1fr;
       }
 
       .nav-links,
       .contact-inline {
         display: none;
       }
+
+      h1 {
+        max-width: none;
+      }
+
+      .hero-strip {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 640px) {
-      .hero { padding-top: 50px; }
+      .hero {
+        padding-top: 34px;
+      }
+
       .hero-main,
       .hero-side,
-      .content-card,
       .service-card,
-      .note-card,
-      .contact-card { padding: 22px; }
+      .proof-card,
+      .contact-card {
+        padding: 18px;
+      }
+
+      .logo-shell {
+        width: 40px;
+        height: 40px;
+        border-radius: 13px;
+      }
+
+      .owner-row {
+        grid-template-columns: 74px 1fr;
+      }
+
+      .owner-shell {
+        width: 74px;
+        height: 74px;
+        border-radius: 18px;
+      }
     }
   </style>
 </head>
@@ -395,14 +628,17 @@
   <div class="topbar">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="Hardline IT Group home">
-        <div class="brand-mark">H</div>
+        <div class="logo-shell" id="logoShell">
+          <img class="brand-logo" src="logo.png" alt="Hardline IT Group logo" onerror="this.style.display='none';this.parentElement.classList.add('fallback');" />
+          <div class="fallback-badge">H</div>
+        </div>
         <div class="brand-copy">
           <strong>Hardline IT Group</strong>
           <span>Dental IT Support</span>
         </div>
       </a>
 
-      <nav class="nav-links">
+      <nav class="nav-links" aria-label="Primary navigation">
         <a href="#services">Services</a>
         <a href="#why-hardline">Why Hardline</a>
         <a href="#contact">Contact</a>
@@ -420,40 +656,62 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-main">
-          <div class="eyebrow">Colorado Springs & Pueblo • Dental IT Support</div>
-          <h1>Technology support for dental practices that need things to just work.<span>Local. Dependable. Straightforward.</span></h1>
+          <div class="eyebrow">Colorado Springs + Pueblo Dental IT</div>
+          <h1>
+            Keep the practice moving.
+            <span class="hero-accent">Skip the IT drama.</span>
+          </h1>
           <p class="lead">
-            Hardline IT Group provides practical IT support for dental offices that rely on stable systems, secure access, responsive help, and a technology setup that does not get in the way of patient care.
+            Hardline IT Group helps dental offices stay stable, secure, and easy to run with direct support for dental software, Microsoft 365, backups, workstations, and the everyday problems that slow teams down.
           </p>
 
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="tel:17197557767">Call 719-755-7767</a>
+            <a class="btn btn-secondary" href="mailto:hello@hardlineitgroup.com">Email Hardline</a>
+          </div>
+
           <div class="hero-strip">
-            <div><strong>Dental software:</strong> Dentrix, Eaglesoft, Open Dental</div>
-            <div><strong>Service area:</strong> Colorado Springs & Pueblo</div>
-            <div><strong>Email:</strong> <a class="subtle-link" href="mailto:hello@hardlineitgroup.com">hello@hardlineitgroup.com</a></div>
-            <div><strong>Phone:</strong> <a class="subtle-link" href="tel:17197557767">719-755-7767</a></div>
+            <div class="strip-item">
+              <strong>Dental software</strong>
+              <span>Dentrix, Eaglesoft, Open Dental</span>
+            </div>
+            <div class="strip-item">
+              <strong>Support style</strong>
+              <span>Local, owner-led, straightforward</span>
+            </div>
+            <div class="strip-item">
+              <strong>Core focus</strong>
+              <span>Uptime, security, recovery, responsiveness</span>
+            </div>
           </div>
         </div>
 
         <aside class="hero-side">
-          <div>
-            <h2>Built for busy offices</h2>
-            <p>
-              When your front desk, operatories, email, backups, or workstations are acting up, you need support that is calm, fast, and familiar with how a dental office actually runs.
-            </p>
+          <div class="stack-label">Owner-led support</div>
+
+          <div class="owner-row">
+            <div class="owner-shell" id="ownerShell">
+              <img class="owner-photo" src="IMG_0171.jpg" alt="Alec from Hardline IT Group" loading="eager" onerror="this.style.display='none';this.parentElement.classList.add('fallback');" />
+              <div class="fallback-badge">AE</div>
+            </div>
+            <div>
+              <h2>Small photo. Cleaner look.</h2>
+              <p>Your image is intentionally kept compact here so it reads sharper and does not dominate the page.</p>
+            </div>
           </div>
 
-          <div class="side-list">
-            <div class="side-item">
-              <strong>Microsoft 365 and access security</strong>
-              <p>Cleaner user management, better account security, and less day-to-day friction.</p>
+          <div class="trust-list">
+            <div class="trust-card">
+              <strong>Built for busy offices</strong>
+              <p>Help around front desk flow, operatories, email, logins, workstations, and the core systems staff rely on all day.</p>
             </div>
-            <div class="side-item">
-              <strong>Servers, PCs, backups, and recovery</strong>
-              <p>Support focused on uptime, recoverability, and keeping systems dependable.</p>
+            <div class="trust-card">
+              <strong>Clear fixes, not filler</strong>
+              <p>No generic fluff, no oversized promises, and no endless ticket ping-pong.</p>
             </div>
-            <div class="side-item">
-              <strong>Local support with a personal feel</strong>
-              <p>You are not calling a giant help desk. You are working with someone who knows the area and cares about the practices here.</p>
+            <div class="trust-card">
+              <strong>Real local presence</strong>
+              <p>You are dealing with a nearby business, not a giant support queue with no context.</p>
             </div>
           </div>
         </aside>
@@ -463,35 +721,63 @@
     <section class="section" id="services">
       <div class="container">
         <div class="section-head">
-          <h2>Services</h2>
-          <p>Support built around the systems dental teams depend on every day, from front desk workflows to servers and security.</p>
+          <h2>What Hardline handles</h2>
+          <p>A tighter services section with less overlap so every card earns its place.</p>
         </div>
 
         <div class="services-grid">
           <article class="service-card">
-            <h3>Dental Software Support</h3>
-            <p>Support for Dentrix, Eaglesoft, and Open Dental environments, including the small issues that can turn into big workflow problems.</p>
+            <span class="card-tag">Software</span>
+            <h3>Dental software support</h3>
+            <p>Fast help for Dentrix, Eaglesoft, and Open Dental when workflows get stuck or unstable.</p>
           </article>
           <article class="service-card">
-            <h3>Workstations & Server Maintenance</h3>
-            <p>Stable desktops, healthy servers, and better day-to-day reliability for the systems your staff uses most.</p>
+            <span class="card-tag">Systems</span>
+            <h3>PCs, servers, and daily reliability</h3>
+            <p>Keep workstations dependable, keep servers healthy, and keep small issues from snowballing.</p>
           </article>
           <article class="service-card">
-            <h3>Microsoft 365 Setup & Security</h3>
-            <p>Email, user access, security settings, and practical cleanup that makes the environment easier to manage.</p>
+            <span class="card-tag">Microsoft 365</span>
+            <h3>Email, access, and account security</h3>
+            <p>Cleaner user setup, stronger sign-ins, and less friction for staff who just need to get work done.</p>
           </article>
           <article class="service-card">
-            <h3>HIPAA-Aligned Hardening</h3>
-            <p>Practical security improvements to reduce risk, tighten access, and strengthen the foundation of your environment.</p>
+            <span class="card-tag">Security</span>
+            <h3>Practical hardening</h3>
+            <p>Lock down the basics, reduce avoidable risk, and make the environment easier to trust.</p>
           </article>
           <article class="service-card">
-            <h3>Backup & Disaster Recovery</h3>
-            <p>Backup strategy, restore planning, and systems that are easier to recover when something goes wrong.</p>
+            <span class="card-tag">Recovery</span>
+            <h3>Backups and restore planning</h3>
+            <p>Make recovery feel realistic instead of theoretical when something important goes sideways.</p>
           </article>
           <article class="service-card">
-            <h3>Remote Support</h3>
-            <p>Responsive support without the usual runaround, focused on solving problems clearly and keeping your office moving.</p>
+            <span class="card-tag">Support</span>
+            <h3>Responsive remote help</h3>
+            <p>Direct troubleshooting that gets the office back to patients, schedules, and normal flow.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="container">
+        <div class="process-band">
+          <div class="process-step">
+            <small>01</small>
+            <strong>Find the weak spots</strong>
+            <span>Look at what keeps breaking, slowing down, or creating staff frustration.</span>
+          </div>
+          <div class="process-step">
+            <small>02</small>
+            <strong>Clean up the foundation</strong>
+            <span>Tighten logins, devices, backups, and the systems the office depends on every day.</span>
+          </div>
+          <div class="process-step">
+            <small>03</small>
+            <strong>Keep it steady</strong>
+            <span>Stay available when something goes wrong so the practice can keep moving.</span>
+          </div>
         </div>
       </div>
     </section>
@@ -499,97 +785,59 @@
     <section class="section" id="why-hardline">
       <div class="container">
         <div class="section-head">
-          <h2>Why choose Hardline</h2>
-          <p>Good support should feel dependable, personal, and grounded in the real world your practice operates in.</p>
+          <h2>Why Hardline feels different</h2>
+          <p>The page now sells the vibe better: more confident, less generic, and more personal without repeating itself.</p>
         </div>
 
-        <div class="notes-grid">
-          <article class="note-card">
-            <h3>Local by design</h3>
-            <p>Hardline IT Group is a local business run by a Colorado native. That matters because you are not just hiring another IT company. You are working with someone from your own community who cares about the businesses here and wants to be the kind of neighbor you can rely on.</p>
+        <div class="proof-grid">
+          <article class="proof-card">
+            <span class="proof-tag">Local</span>
+            <h3>Close to the practices you support</h3>
+            <p>Colorado Springs and Pueblo offices get help from someone who actually serves this area.</p>
           </article>
-          <article class="note-card">
-            <h3>Practical, not performative</h3>
-            <p>The goal is not to drown you in buzzwords or oversell things you do not need. The goal is to keep your office stable, secure, and easier to run.</p>
+          <article class="proof-card">
+            <span class="proof-tag">Dependable</span>
+            <h3>Focused on calm, stable operations</h3>
+            <p>The goal is less scrambling, fewer interruptions, and a setup that feels under control.</p>
           </article>
-          <article class="note-card">
-            <h3>Support that feels human</h3>
-            <p>When you call, you should feel like you are talking to someone who actually wants to help, understands the pressure on your staff, and takes ownership of the problem.</p>
+          <article class="proof-card">
+            <span class="proof-tag">Straightforward</span>
+            <h3>Easy to work with</h3>
+            <p>No bloated copy, no fake enterprise tone, and no runaround when the office needs real help.</p>
           </article>
-        </div>
-
-        <div class="content-card" style="margin-top:18px;">
-          <p>
-            Dental offices do not need more noise. They need technology that works, support that shows up, and someone they trust to help keep the practice moving. That is the role Hardline IT Group is built to fill.
-          </p>
-          <p class="quote">
-            “We are not just another IT business. We are part of this community, and we are here to help the offices around us stay secure, stable, and supported.”
-          </p>
         </div>
       </div>
     </section>
 
-    <section class="section" id="about">
+    <section class="section contact-wrap" id="contact">
       <div class="container">
-        <div class="section-head">
-          <h2>About Hardline IT Group</h2>
-          <p>Dependable IT support for dental practices in Colorado Springs and Pueblo.</p>
-        </div>
-
-        <div class="content-card">
-          <p>
-            Hardline IT Group focuses on the technology side of keeping a practice running well: workstations, servers, Microsoft 365, security, backups, and the day-to-day support that keeps small issues from turning into major disruptions. The approach is straightforward, responsive, and built around what actually helps a dental office operate more smoothly.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="owner">
-      <div class="container">
-        <div class="section-head">
-          <h2>Owner-Led, Local Support</h2>
-          <p>Hardline IT Group is built to feel personal, dependable, and close to home — because it is.</p>
-        </div>
-
-        <div class="content-card owner-grid">
-          <div class="owner-photo-wrap">
-            <img class="owner-photo" src="IMG_0171.jpg" alt="Alec from Hardline IT Group" />
-          </div>
+        <div class="contact-card">
           <div>
+            <div class="eyebrow">Get in touch</div>
+            <h2>Need a stronger IT setup for your practice?</h2>
             <p>
-              Hardline IT Group is run locally by a Colorado native who understands how much small businesses depend on stable technology and straightforward support. The goal is simple: be the kind of IT partner people actually want to call when something goes wrong.
+              Reach out for ongoing support, a second opinion, or help cleaning up a setup that keeps creating friction for the office.
             </p>
-            <p class="quote">
-              You are not being handed off to a giant help desk or a faceless support queue. You are working with someone who lives here, cares about the community here, and wants to build long-term trust with the practices he supports.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-head">
-          <h2>Contact</h2>
-          <p>Reach out if your office needs dependable support, a second opinion, or a more stable setup.</p>
-        </div>
-
-        <div class="contact-grid">
-          <article class="contact-card">
-            <h3>Get in touch</h3>
-            <div class="contact-list">
-              <div><strong>Email:</strong> <a class="subtle-link" href="mailto:hello@hardlineitgroup.com">hello@hardlineitgroup.com</a></div>
-              <div><strong>Phone:</strong> <a class="subtle-link" href="tel:17197557767">719-755-7767</a></div>
-              <div><strong>Service Area:</strong> Colorado Springs & Pueblo</div>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="mailto:hello@hardlineitgroup.com">Start the conversation</a>
+              <a class="btn btn-secondary" href="tel:17197557767">Call now</a>
             </div>
-          </article>
+          </div>
 
-          <article class="contact-card">
-            <h3>A better first impression</h3>
-            <p>
-              Whether you need ongoing support or just want to talk through where your current setup is weak, Hardline IT Group is built to be approachable, dependable, and easy to work with.
-            </p>
-          </article>
+          <div class="contact-points">
+            <div class="contact-point">
+              <strong>Email</strong>
+              <a class="subtle-link" href="mailto:hello@hardlineitgroup.com">hello@hardlineitgroup.com</a>
+            </div>
+            <div class="contact-point">
+              <strong>Phone</strong>
+              <a class="subtle-link" href="tel:17197557767">719-755-7767</a>
+            </div>
+            <div class="contact-point">
+              <strong>Service area</strong>
+              Colorado Springs &amp; Pueblo
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -603,7 +851,7 @@
         <span class="divider"></span>
         <a href="tel:17197557767">719-755-7767</a>
         <span class="divider"></span>
-        <span>Colorado Springs & Pueblo</span>
+        <span>Colorado Springs &amp; Pueblo</span>
       </div>
     </div>
   </footer>
